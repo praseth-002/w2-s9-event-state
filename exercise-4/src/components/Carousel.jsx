@@ -1,21 +1,32 @@
 import React from "react";
+import { useState } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
 export const Carousel = ({ images }) => {
-  /* You will need to  use  state to mnage the current image */
-
-  /* You will need to hanle the click on left and right button */
-
-  /* You will need to manage the cases when we are on the last image or first image*/
+  const [stateIndex, setIndex] = useState(0);
+  let imageAmount = images.length;
+  function leftArrow (){
+    if (stateIndex === 0) {
+      setIndex(imageAmount-1);
+    } else {
+      setIndex(stateIndex-1);
+    }
+  }
+  function rightArrow (){
+    if (stateIndex === imageAmount-1) {
+      setIndex(0);
+    } else {
+      setIndex(stateIndex+1)
+    }
+  }
 
   return (
     <div className="carousel">
-      <BsArrowLeftCircleFill className="arrow arrow-left" />
+      <BsArrowLeftCircleFill className="arrow arrow-left" onClick={leftArrow}/>
 
-      {/* YOu will need to display the current image, not the first one.. */}
-      <img src={images[0].src} alt={images[0].alt} className="slide" />
+      <img src={images[stateIndex].src} alt={images[stateIndex].alt} className="slide" />
 
-      <BsArrowRightCircleFill className="arrow arrow-right" />
+      <BsArrowRightCircleFill className="arrow arrow-right" onClick={rightArrow}/>
     </div>
   );
 };

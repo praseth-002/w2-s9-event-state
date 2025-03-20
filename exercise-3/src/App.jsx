@@ -5,6 +5,7 @@ function App() {
   const [stateA, setA] = useState("");
   const [stateB, setB] = useState("");
   const [stateC, setC] = useState(null);
+  const [stateD, setD] = useState("");
   /* You will need some function to handle the key pressed and button events */
   function onA(event) {
     setA(event.target.value);
@@ -16,8 +17,10 @@ function App() {
   }
   function compute() {
     if (!/[0-9]/.test(stateA) || !/[0-9]/.test(stateB)) {
+      setD("error");
       setC("WARNING");
     } else {
+      setD("")
       setC(parseFloat(stateA) + parseFloat(stateB));
     }
     console.log(stateC);
@@ -35,7 +38,7 @@ function App() {
 
       <label>A + B =</label>
 
-      <input disabled value={stateC} />
+      <input className={stateD} disabled value={stateC} />
       <button onClick={compute}>Compute</button>
     </main>
   );
